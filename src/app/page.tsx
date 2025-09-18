@@ -94,10 +94,10 @@ export default function Home() {
           </div>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/consult"><Button size="lg" className="w-full">{t.ctaConsult}</Button></Link>
-            <Link href="/records"><Button size="lg" className="w-full">{t.ctaRecords}</Button></Link>
-            <Link href="/pharmacy"><Button size="lg" className="w-full">{t.ctaPharmacy}</Button></Link>
-            <Link href="/doctor"><Button size="lg" className="w-full">{t.ctaDoctor}</Button></Link>
+            <Button asChild size="lg" className="w-full"><Link href="/consult">{t.ctaConsult}</Link></Button>
+            <Button asChild size="lg" className="w-full"><Link href="/records">{t.ctaRecords}</Link></Button>
+            <Button asChild size="lg" className="w-full"><Link href="/pharmacy">{t.ctaPharmacy}</Link></Button>
+            <Button asChild size="lg" className="w-full"><Link href="/doctor">{t.ctaDoctor}</Link></Button>
           </div>
         </div>
       </section>
