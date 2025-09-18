@@ -1,11 +1,20 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-
-export function middleware(_request: NextRequest) {
-  // Pass-through middleware to avoid build/runtime issues from incompatible imports
-  return NextResponse.next();
+import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+ 
+export async function middleware(request: NextRequest) {
+	const session = await auth.api.getSession({
+		headers: await headers()
+	})
+ 
+	if(!session) {
+		return NextResponse.redirect(new URL("/sign-in", request.url));
+	}
+ 
+	return NextResponse.next();
 }
-
+ 
 export const config = {
-  matcher: ["/consult/:path*", "/records/:path*", "/doctor/:path*"],
+  runtime: "nodejs",
+  matcher: ["/consult", "/records", "/doctor"], // Apply middleware to specific routes
 };
