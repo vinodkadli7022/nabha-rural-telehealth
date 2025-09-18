@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { toast } from "sonner";
 
 const T = {
   en: {
@@ -59,6 +60,17 @@ export default function ConsultPage() {
   }, []);
 
   const start = async () => {
+    // Basic environment checks to avoid silent failures
+    const isSecure = typeof window !== "undefined" && (location.protocol === "https:" || location.hostname === "localhost");
+    if (!isSecure) {
+      toast.error("Camera/mic requires HTTPS. Please use https or localhost.");
+      return;
+    }
+    if (!navigator?.mediaDevices?.getUserMedia) {
+      toast.error("Camera/mic not supported on this device/browser.");
+      return;
+    }
+
     try {
       const constraints: MediaStreamConstraints = {
         audio: true,
@@ -82,9 +94,17 @@ export default function ConsultPage() {
         await remoteRef.current.play().catch(() => {});
       }
       setStarted(true);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
-      alert("Camera/mic permission denied or unavailable.");
+      const messageMap: Record<string, string> = {
+        NotAllowedError: "Permission denied. Please allow camera/mic.",
+        NotFoundError: "No camera/mic found. Please connect a device.",
+        NotReadableError: "Device is in use by another app.",
+        OverconstrainedError: "Requested media constraints not supported.",
+        SecurityError: "Permissions blocked by browser settings.",
+      };
+      const name = e?.name as string | undefined;
+      toast.error(messageMap[name || ""] || "Camera/mic permission denied or unavailable.");
     }
   };
 

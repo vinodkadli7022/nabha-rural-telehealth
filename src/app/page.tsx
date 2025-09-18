@@ -72,8 +72,8 @@ export default function Home() {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-20 sm:py-28 text-white">
+        <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+        <div className="relative z-10 pointer-events-auto mx-auto max-w-6xl px-4 sm:px-6 py-20 sm:py-28 text-white">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
             <div>
               <h1 className="text-3xl sm:text-5xl font-bold tracking-tight">{t.title}</h1>
