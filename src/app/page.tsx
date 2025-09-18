@@ -72,14 +72,14 @@ export default function Home() {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-20 sm:py-28 text-white">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
             <div>
               <h1 className="text-3xl sm:text-5xl font-bold tracking-tight">{t.title}</h1>
               <p className="mt-3 sm:mt-4 text-base sm:text-lg max-w-2xl opacity-90">{t.subtitle}</p>
             </div>
-            <div className="w-56">
+            <div className="w-full sm:w-56">
               <Select value={lang} onValueChange={(v) => setLang(v as Lang)}>
                 <SelectTrigger aria-label="Language" className="bg-white/10 backdrop-blur text-white border-white/30">
                   <SelectValue placeholder="Language" />
@@ -94,10 +94,10 @@ export default function Home() {
           </div>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/consult"><Button className="w-full">{t.ctaConsult}</Button></Link>
-            <Link href="/records"><Button className="w-full">{t.ctaRecords}</Button></Link>
-            <Link href="/pharmacy"><Button className="w-full">{t.ctaPharmacy}</Button></Link>
-            <Link href="/doctor"><Button className="w-full">{t.ctaDoctor}</Button></Link>
+            <Link href="/consult"><Button size="lg" className="w-full">{t.ctaConsult}</Button></Link>
+            <Link href="/records"><Button size="lg" className="w-full">{t.ctaRecords}</Button></Link>
+            <Link href="/pharmacy"><Button size="lg" className="w-full">{t.ctaPharmacy}</Button></Link>
+            <Link href="/doctor"><Button size="lg" className="w-full">{t.ctaDoctor}</Button></Link>
           </div>
         </div>
       </section>
@@ -111,7 +111,7 @@ export default function Home() {
               <p className="mt-3 text-sm sm:text-base text-muted-foreground">{t.problemText}</p>
             </CardContent>
           </Card>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Card>
               <CardContent className="pt-6">
                 <p className="text-3xl font-bold">60+</p>
